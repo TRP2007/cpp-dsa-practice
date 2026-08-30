@@ -1,0 +1,212 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+struct node {
+    int prn;
+    string name;
+    node* next;
+};
+node *temp,*temp1,*temp2;
+
+class pinclub {
+ public:
+    node *head,*tail,*nnode;
+    pinclub() {
+        head=tail=NULL;
+    }
+    void create();
+    void display();
+    void insertion();
+    void insertionlast();
+    void insertionmid();
+    void deletepresident();
+    void deletesecretary();
+    void deletemember();
+    void count(); 
+    void concatenation(pinclub &l2);
+};
+
+void pinclub::create() {
+    char m;
+    do {
+        nnode=new node;
+        nnode->next=NULL;
+        cout<<endl<<"Enter prn number: ";
+        cin>>nnode->prn;
+        cout<<endl<<"Enter name of user: ";
+        cin>>nnode->name;
+        if(head==NULL) {
+            head=tail=nnode;
+        } else {
+            tail->next=nnode;
+            tail=nnode;
+        }
+        cout<<endl<<"Do you want to continue(y or n): ";
+        cin>>m;
+    } while(m=='y');
+    display();
+}
+
+void pinclub::display() {
+    cout<<endl<<" YOUR UPDATED CLUB DATA IS: "<<endl;
+    if(head==NULL) {
+        cout<<endl<<"club is empty";
+    } else {
+        cout<<"\n PRN NO.\t NAME"<<endl;  
+        temp=head;
+        while(temp!=NULL) {
+            cout<<endl<<temp->prn<<"           " <<temp->name;
+            temp=temp->next;
+        }
+    }
+}
+
+void pinclub::insertion() { //president
+    nnode=new node;
+    nnode->next=NULL;
+    cout<<endl<<"Enter president name: ";
+    cin>>nnode->name;
+    cout<<endl<<"Enter prn of president: ";
+    cin>>nnode->prn;
+    nnode->next=head;
+    head=nnode;
+    display();
+}
+
+void pinclub::insertionlast() {
+    nnode=new node;
+    nnode->next=NULL;
+    cout<<endl<<"Enter name of secretary : ";
+    cin>>nnode->name;
+    cout<<endl<<"Enter prn of secretary: ";
+    cin>>nnode->prn;
+    tail->next=nnode;
+    tail=nnode;
+    display();
+}
+
+void pinclub::insertionmid() {
+    cout<<endl<<"Middle insertion";
+    string key;
+    cout<<endl<<"Enter the name of club member after which you want to insert: ";
+    cin>>key;
+    nnode=new node;
+    nnode->next=NULL;
+    cout<<endl<<"Enter prn number that you want to insert: ";
+    cin>>nnode->prn;
+    cout<<endl<<"Enter name of user that you want to insert: ";
+    cin>>nnode->name;
+    temp=head;
+    while(temp!=NULL && temp->name!=key) {
+        temp=temp->next;
+    }
+    if(temp!=NULL) {
+        nnode->next=temp->next;
+        temp->next=nnode;
+    }
+    display();
+}
+
+void pinclub::deletepresident() {
+    if(head!=NULL) {
+        temp=head;
+        cout<<endl<<"you deleted president= "<<temp->name<<" "<<temp->prn<<" "; 
+        head=temp->next;
+        delete temp;
+        display();
+    }
+}
+
+void pinclub::deletesecretary() {
+    if(head!=NULL && tail!=NULL) {
+        temp=head;
+        while(temp->next!=tail) {
+            temp=temp->next;
+        }
+        cout<<endl<<"you deleted secretary= "<<tail->name<<" "<<tail->prn<<" "; 
+        delete tail;
+        tail=temp;
+        tail->next=NULL;
+        display();
+    }
+}
+
+void pinclub::deletemember() {
+    string key;
+    cout<<endl<<"Enter the member name that you want to delete: ";
+    cin>>key;
+    temp=head;
+    while(temp->next!=NULL && (temp->next->name)!=key) {
+        temp=temp->next;
+    }
+    if(temp->next==NULL) return;
+    temp1=temp->next;
+    temp2=temp1->next;
+    cout<<endl<<"you deleted member= "<<temp1->name<<" "<< temp1->prn<<" "; 
+    delete temp1;
+    temp->next=temp2;
+    display();
+}
+
+void pinclub::count() {
+    int c=0;
+    temp=head;
+    while(temp!=NULL) {
+        c++;
+        temp=temp->next;
+    }
+    cout<<"\nTotal members in club are: "<<c<<endl;
+}
+
+void pinclub::concatenation(pinclub &l2) {
+    if(tail!=NULL && l2.head!=NULL) {
+        tail->next=l2.head;
+        tail=l2.tail;
+        cout<<"\nClubs concatenated successfully"<<endl;
+    } else {
+        cout<<"\nConcatenation not possible (one list is empty)."<<endl;
+    }
+}
+
+int main() {
+    pinclub l1,l2;
+    int choice;
+    cout<<"\nWelcome to PINNACLE Club 1"<<endl;
+    l1.create();
+
+    cout<<"\nWelcome to PINNACLE Club 2"<<endl;
+    l2.create();
+
+    do {
+        cout<<"\n\nOPERATIONS";
+        cout<<"\n1. Insert President (Club 1)";
+        cout<<"\n2. Insert Secretary (Club 1)";
+        cout<<"\n3. Insert Member in Middle (Club 1)";
+        cout<<"\n4. Delete President (Club 1)";
+        cout<<"\n5. Delete Secretary (Club 1)";
+        cout<<"\n6. Delete Member (Club 1)";
+        cout<<"\n7. Count Members (Club 1)";
+        cout<<"\n8. Display Members (Club 1)";
+        cout<<"\n9. Concatenate Club1 + Club2";
+        cout<<"\n10. Exit";
+        cout<<"\nEnter your choice: ";
+        cin>>choice;
+
+        switch(choice) {
+            case 1: l1.insertion(); break;
+            case 2: l1.insertionlast(); break;
+            case 3: l1.insertionmid(); break;
+            case 4: l1.deletepresident(); break;
+            case 5: l1.deletesecretary(); break;
+            case 6: l1.deletemember(); break;
+            case 7: l1.count(); break;
+            case 8: l1.display(); break;
+            case 9: l1.concatenation(l2); l1.display(); break;
+            case 10: cout<<"\nExiting..."; break;
+            default: cout<<"\nInvalid choice!";
+        }
+    } while(choice!=10);
+
+    return 0;
+}
