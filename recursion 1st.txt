@@ -1,0 +1,19 @@
+/******************************************************************************
+print name n times using recursion..A to Z striver
+*******************************************************************************/
+#include <iostream>
+using namespace std;
+void f(int i,int n)
+{
+    if(i>n)//this is base condition
+    return;
+    cout<<" tanuja "<< endl;
+    f(i+1,n);
+}
+int main()
+{
+    int n;
+    cin>>n;
+    f(1,n);
+    return 0;
+}
