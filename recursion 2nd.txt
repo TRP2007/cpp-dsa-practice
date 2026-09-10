@@ -1,0 +1,21 @@
+/******************************************************************************
+ print number (1-n)
+using recursion
+*******************************************************************************/
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+void f(int i,int n)
+{
+    if(i>n)
+      return;
+    cout<< i << endl;//if i take 1 instead of i then it will print 1... 5 times
+    f(i+1,n);
+}
+int main()
+{
+    int n;
+    cin>>n;
+    f(1,n);
+    return 0;
+}
