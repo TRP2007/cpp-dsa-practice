@@ -1,0 +1,35 @@
+/******************************************************************************
+ reverse an array using parametrised recursion
+
+*******************************************************************************/
+#include <iostream>
+using namespace std;
+void f(int l,int r,int A[])
+{
+    if(l>=r)
+    {
+    return;
+    }
+    swap(A[l],A[r]);
+    f(l+1,r-1,A);
+}
+
+
+int main()
+{
+    int n;
+    cin>>n;
+    int A[n];
+    for(int i=0;i<=n-1;i++)
+    {
+    cin>>A[i];
+    }
+    f(0,n-1,A);
+
+    for( int i=0;i<=n-1;i++)
+    {
+        cout<<A[i]<<" ";
+    }
+    
+    return 0;
+}
