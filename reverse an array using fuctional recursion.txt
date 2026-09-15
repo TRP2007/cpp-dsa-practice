@@ -1,0 +1,34 @@
+/******************************************************************************
+reversing array using functional recursion
+*******************************************************************************/
+#include <iostream>
+using namespace std;
+
+void f(int i,int n,int A[])
+{
+    
+    if(i>=n/2)
+    return;
+
+    swap(A[i], A[n - i - 1]);
+
+    f(i + 1, n, A);
+}
+int main()
+{
+    int n;
+    cin>>n;
+    int A[n];
+    for(int i=0;i<=n-1;i++)
+    {
+        cin>>A[i];
+    }
+     f(0, n, A);
+    for(int i=0;i<=n-1;i++)
+    {
+        cout<<A[i]<<" ";
+    }
+    
+
+    return 0;
+}
