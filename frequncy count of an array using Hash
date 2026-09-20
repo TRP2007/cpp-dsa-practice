@@ -1,0 +1,48 @@
+/*count the frequency of any array element using hashing..
+(from striver A to Z 1st hashing lec)*/
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+   int n;//n is for size
+
+   cout << "Enter size of array: ";
+   cin >> n;
+
+   int A[n];
+
+   cout << "Enter array elements: ";
+   for(int i=0;i<n;i++)
+   {
+       cin>>A[i];//taking input of array
+   }
+
+   int hash[13] = {0};//depending on max value in the array
+
+   cout << "\nCounting frequency...\n";
+
+   for (int i=0;i<n;i++)//count frequency of an array element
+   {
+       hash[A[i]]++;
+   }
+
+   int q;
+
+   cout << "\nEnter number of queries: ";
+   cin>>q;
+
+   while(q--)
+   {
+       int number;
+
+       cout << "Enter number to find frequency: ";
+       cin>>number;
+
+       cout << "Frequency of " << number
+            << " = " << hash[number] << endl;
+   }
+
+   return 0;
+}
