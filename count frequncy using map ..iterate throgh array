@@ -1,0 +1,38 @@
+/*(2)(you can iterate in the map)count frequncy of an element in an array using map function...it is start from 1 not 0 like hash
+**/
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main()
+{
+    int n;
+    cout<<"enter size of array ";
+    cin>>n;
+    int A[n];
+    cout << "Enter array elements: ";
+    map<int,int> mp;
+    for(int i=0;i<n;i++)
+    {
+        cin>>A[i];
+      mp[A[i]]++;
+    }
+    
+    for(auto it:mp)
+    {
+        cout<<it.first<<"->"<<it.second<<endl;//iterate through an array...using this u can see count od all element directly no need of below program but for user understanding i keep as it is guyss
+    }
+    int q;
+    cout<<"enter how muny no. frequncy you want to count";
+    cin>>q;
+    while(q--)
+    {
+        int number;
+        cout << "Enter number: "<<endl;
+        cin >> number;
+        cout<<"frequncy of above no is: "<<mp[number];
+        
+    }
+
+    return 0;
+}
