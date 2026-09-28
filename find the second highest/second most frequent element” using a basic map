@@ -1,0 +1,49 @@
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    int A[n];
+
+    map<int, int> mp;
+
+    // Store frequency
+    for(int i = 0; i < n; i++)
+    {
+        cin >> A[i];
+        mp[A[i]]++;
+    }
+
+    int highest = 0;
+    int secondHighest = 0;
+
+    // Find highest and second highest frequency
+    for(auto it : mp)
+    {
+        if(it.second > highest)
+        {
+            secondHighest = highest;
+            highest = it.second;
+        }
+        else if(it.second > secondHighest && it.second != highest)
+        {
+            secondHighest = it.second;
+        }
+    }
+
+    // Find element having second highest frequency
+    for(auto it : mp)
+    {
+        if(it.second == secondHighest)
+        {
+            cout << it.first;
+            break;
+        }
+    }
+
+    return 0;
+}
